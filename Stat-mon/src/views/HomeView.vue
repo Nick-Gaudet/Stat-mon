@@ -54,7 +54,7 @@ export default {
       };
 
       axios.request(options).then((response)=> {
-        // console.log(JSON.stringify(response.data));
+        // console.log(response.data);
         // this.teamPhoto = (JSON.stringify(response.data.response[0][0].team.logo));
         // this.apiData = (JSON.stringify(response.data.response[0][0].team.logo));
         this.apiData = response.data;
