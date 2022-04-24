@@ -1,2 +1,2 @@
-# Bet-mon
-Sports betting website created for web applications development final project.
+# Stat-mon
+Sports statistics website created for web application development final project.
