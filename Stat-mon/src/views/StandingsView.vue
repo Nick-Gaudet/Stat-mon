@@ -2,11 +2,12 @@
   <div class="standings">
     <h1>Standings</h1>
     <div>
-      <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
-        <b-dropdown-item>NBA</b-dropdown-item>
-        <b-dropdown-item>NHL</b-dropdown-item>
-        <b-dropdown-item>MLB</b-dropdown-item>
-      </b-dropdown>
+      <select name="league" id="league" v-model="league">
+        <option>Select A League</option>
+        <option value="NBA">NBA</option>
+        <option value="MLB">MLB</option>
+        <option value="NHL">NHL</option>
+      </select>
     </div>
 
     <div class='sportsData'>
@@ -43,7 +44,8 @@ export default{
   name: 'StandingsView',
   data(){
     return{
-      apiData : []
+      apiData : [],
+      league: ''
     };
   },
   created:function(){
