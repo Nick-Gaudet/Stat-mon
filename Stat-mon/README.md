@@ -1,4 +1,4 @@
-# bet-mon
+# Stat-mon
 
 ## Project setup
 ```
