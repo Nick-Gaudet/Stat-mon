@@ -5,20 +5,23 @@ const Account = db.accounts;
 exports.create = (req, res) => { // fill the database with user data
 
     const account = new Account({
-        email: req.body.email,
-        name: req.body.name,
-        password: req.body.password
+        email: req.data.email,
+        name: req.data.name,
+        password: req.data.password
     });
 
     account
         .save(account)
         .then(data => {
-            res.send(data);
+            res.send({
+                data: data, 
+                auth: true
+            });
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "ERROR"
+                data: err,
+                auth: false
             });
         });
     

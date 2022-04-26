@@ -28,7 +28,28 @@ export default {
             }
         })
     },
-
+    register(email,name,password,callback){ // opposite of login, logically
+        authRequest(email, password, (res) => {
+            if (res.auth) { // if user account already exists
+                delete localStorage.token;
+                callback({
+                    auth: false
+                });
+                this.onLoginStatus(false);
+            } else {
+                localStorage.token = res.token;
+                dbRequests.create({ email: email, name: name, password: password })
+                console.log("Account Registered!")
+                this.userInfo = res.result// store the user info
+                callback({
+                    auth: true,
+                    token: res.token,
+                    userInfo: this.userInfo
+                });
+                this.onLoginStatus(true);
+            }
+        })   
+    },
     logout(callback) {
         delete localStorage.token;
         localStorage.clear();
@@ -63,4 +84,4 @@ function authRequest(email, password, callback) { // Sends request to db for use
             }
         })
     
-    }
+}

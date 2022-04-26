@@ -1,8 +1,12 @@
 <template>
-    <form @submit.prevent="login">
+    <form @submit.prevent="register">
             <div class="emailField">
                 <label for="email"> Email: </label>
                 <input type="text" v-model="email" name="email" placeholder="Email"/>
+            </div>
+            <div class="nameField">
+                <label for="name"> Name: </label>
+                <input type="text" v-model="name" name="name" placeholder="Name"/>
             </div>
             <div class="passwordField">
                 <label for="password"> Password: </label>
@@ -10,31 +14,32 @@
             </div>
             <div v-if="errorMessage"> {{errorMessage}} </div>
             <div class="submitButton">
-                <button class="btn"> Login </button>
+                <button class="btn"> Register </button>
             </div>
     </form>
 </template>
+
 <script>
 /* eslint-disable*/
 
 import loginAuth from "../js/loginAuthentication"
 export default {
-    name: "LoginForm",
+    name: "RegisterForm",
     data(){
         return{
-            name: "Nick",
+            name: "",
             email: "",
             password: "",
             errorMessage: ""
         }
     },
     methods:{
-        login(){
-            loginAuth.login(this.email,this.password, (res) =>{
+        register(){
+            loginAuth.register(this.email,this.name,this.password, (res) =>{
                 if(res.auth){ // if authenticated
                     this.$router.replace("/");
                 }else{
-                    this.errorMessage = "User Doesn't Exist! Please Register!"
+                    this.errorMessage = "User account already exists!"
                 }
             })
 
