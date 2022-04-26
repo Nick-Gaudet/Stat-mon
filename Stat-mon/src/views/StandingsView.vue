@@ -2,11 +2,12 @@
   <div class="standings">
     <h1>Standings</h1>
     <div>
-      <select name="league" id="league" v-model="league">
-        <option>Select A League</option>
+      <select name="league" id="league" @change="loadStandings" @loadstart="loadStandings" v-model="league">
+        <optgroup label="Select A League">Select A League
         <option value="NBA">NBA</option>
         <option value="MLB">MLB</option>
         <option value="NHL">NHL</option>
+        </optgroup>
       </select>
     </div>
 
@@ -16,7 +17,9 @@
                 <tr class="header">
                     <th>Team</th>
                     <th>Name</th>
-                    <th>Conference</th>
+                    <th v-if=!isBaseball>Conference</th>
+                    <th v-if=isBaseball>League</th>
+                    <th v-if=isBaseball>Division</th>
                     <th>Wins</th>
                     <th>Losses</th>
                     <th>Percentage</th>
@@ -26,7 +29,9 @@
                 <tr v-bind:key=team.id v-for="team in apiData">
                     <td>{{team.Key}}</td>
                     <td>{{team.City + " "+ team.Name}}</td>
-                    <td>{{team.Conference}}</td>
+                    <td v-if=!isBaseball>{{team.Conference}}</td>
+                    <td v-if=isBaseball>{{team.League}}</td>
+                    <td v-if=isBaseball>{{team.Division}}</td>
                     <td>{{team.Wins}}</td>
                     <td>{{team.Losses}}</td>
                     <td>{{team.Percentage}}</td>
@@ -45,13 +50,33 @@ export default{
   data(){
     return{
       apiData : [],
-      league: ''
+      league: 'NBA',
+      isBaseball: false
     };
   },
   created:function(){
+    this.loadStandings();
+  },
+  methods:{
+    loadStandings(){
+      let apiKey = "";
+      if (this.league == "NBA"){
+        this.isBaseball = false;
+        apiKey = "0ca715232779441f9ecc1b5955dd2443"
+      };
+      if (this.league == "MLB"){
+        this.isBaseball = true;
+        apiKey = "b25aa2d25de0455bbe95a54906a59a55"
+      };
+      if (this.league == "NHL"){
+        this.isBaseball = false;
+        apiKey = "6d33135f7378437c930d23877a06f9c9"
+      };
+
+
       const options = {
         method: 'GET',
-        url: "https://api.sportsdata.io/v3/nba/scores/json/Standings/2022?key=0ca715232779441f9ecc1b5955dd2443", // this is my free trial key dont do anything evil
+        url: "https://api.sportsdata.io/v3/"+this.league+"/scores/json/Standings/2022?key="+apiKey, // this is my free trial key dont do anything evil
         
       };
 
@@ -63,6 +88,8 @@ export default{
       }).catch(function (error) {
         console.error(error);
       });
+    }
+
   }
 }
 
