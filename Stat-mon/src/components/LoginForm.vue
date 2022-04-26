@@ -1,8 +1,8 @@
 <template>
     <form @submit.prevent="login">
-            <div class="usernameField">
-                <label for="username"> Username/Email: </label>
-                <input type="text" v-model="name" name="username" placeholder="Username"/>
+            <div class="emailField">
+                <label for="email"> Email: </label>
+                <input type="text" v-model="email" name="email" placeholder="Email"/>
             </div>
             <div class="passwordField">
                 <label for="password"> Password: </label>
@@ -16,18 +16,29 @@
 </template>
 <script>
 /* eslint-disable*/
+
+import loginAuth from "../js/loginAuthentication"
+import database from "../router/dbRequests"
 export default {
     name: "LoginForm",
     data(){
         return{
             name: "Nick",
-            email: "nickg@gmail.com",
-            password: "password"
+            email: "",
+            password: "",
+            errorMessage: ""
         }
     },
     methods:{
         login(){
-            this.$router.replace("/");
+            loginAuth.login(this.email,this.password, (res) =>{
+                if(res.auth){ // if authenticated
+                    this.$router.replace("/");
+                }else{
+                    this.errorMessage = "User Doesn't Exist! Please Register!"
+                }
+            })
+
         }
     }
 }

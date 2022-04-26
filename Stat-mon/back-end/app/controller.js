@@ -23,3 +23,12 @@ exports.create = (req, res) => { // fill the database with user data
         });
     
 };
+exports.findUser = (req,res) => {
+    Account.find({"email":req.params.email, "password":req.params.password}) // search the database for login info
+        .then(data =>{
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({message:"ERROR FINDING USER"});
+        });
+};

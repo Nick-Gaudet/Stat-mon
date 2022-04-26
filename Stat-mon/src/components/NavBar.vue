@@ -11,17 +11,25 @@
 
 <script>
 /* eslint-disable */
-export default {
-    name: 'NavBar',
-    data(){
-        return{isLoggedIn: false}
-    },
-    methods:{
-        logout: function(){
-            this.isLoggedIn = !this.isLoggedIn;
+import auth from '../js/loginAuthentication.js'
+    export default {
+        name : 'NavBar',
+        data(){
+            return { isLoggedIn: auth.isLoggedIn()};
+        },
+        created(){
+            auth.onLoginStatus = isLoggedIn =>{
+                this.isLoggedIn = isLoggedIn;
+            }
+        },
+        methods: {
+            logout: function(){
+                auth.logout((res) =>{
+                    console.log(res)
+                });
+            }
         }
     }
-}
 
 </script>
 <style lang="scss">

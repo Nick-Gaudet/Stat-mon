@@ -6,12 +6,11 @@ const cors = require("cors");
 const app = express();
 
 var options = {
-    origin: "http://localhost:8081"
+    origin: "http://localhost:8080"
 };
 app.use(cors(options));
-
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
     res.json({ message: "Stat-mon Server" });
 });
