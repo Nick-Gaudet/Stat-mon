@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="register">
+    <form @submit="register">
             <div class="emailField">
                 <label for="email"> Email: </label>
                 <input type="text" v-model="email" name="email" placeholder="Email"/>
@@ -11,6 +11,8 @@
             <div class="passwordField">
                 <label for="password"> Password: </label>
                 <input type="password" v-model="password" name="password" placeholder="Password"/>
+                <span v-if="score < 2 && !!password">Use Stronger Password!</span>
+                <password-meter @score="onScore" class='passwordMeter' :password="password"/>
             </div>
             <div v-if="errorMessage"> {{errorMessage}} </div>
             <div class="submitButton">
@@ -21,20 +23,35 @@
 
 <script>
 /* eslint-disable*/
-
+import { ref } from 'vue';
+import PasswordMeter from 'vue-simple-password-meter'
 import loginAuth from "../js/loginAuthentication"
 export default {
     name: "RegisterForm",
+    components: { PasswordMeter},
     data(){
+        /* referenced : https://github.com/miladd3/vue-simple-password-meter/tree/next */
+        const password = ref('');
+        const score = ref(null);
+        const onScore = (res) => {
+            // from 0 to 4
+            // one of : 'risky', 'guessable', 'weak', 'safe' , 'secure'
+            score.value = res.score;
+        };
         return{
             name: "",
             email: "",
-            password: "",
-            errorMessage: ""
+            errorMessage: "",
+            password,
+            score,
+            onScore
         }
     },
     methods:{
-        register(){
+        register(e){
+            if(this.score < 2){
+                e.preventDefault();
+            }
             loginAuth.register(this.email,this.name,this.password, (res) =>{
                 if(res.auth){ // if authenticated
                     this.$router.replace("/");
@@ -42,8 +59,50 @@ export default {
                     this.errorMessage = "User account already exists!"
                 }
             })
-
+            
         }
     }
 }
 </script>
+
+<style lang="scss">
+
+span{
+    display: block;
+}
+//npm install vue-simple-password-meter@next --save GLOBAL references
+
+.po-password-strength-bar {
+    border-radius: 2px;
+    transition: all 0.2s linear;
+    height: 5px;
+    max-width: 10rem;
+    margin: auto;
+    margin-top: 8px;
+}
+
+.po-password-strength-bar.risky {
+    background-color: #f95e68;
+    width: 10%;
+}
+
+.po-password-strength-bar.guessable {
+    background-color: #fb964d;
+    width: 32.5%;
+}
+
+.po-password-strength-bar.weak {
+    background-color: #fdd244;
+    width: 55%;
+}
+
+.po-password-strength-bar.safe {
+    background-color: #07e91d;
+    width: 77.5%;
+}
+
+.po-password-strength-bar.secure {
+    background-color: #15963c;
+    width: 100%;
+}
+</style>

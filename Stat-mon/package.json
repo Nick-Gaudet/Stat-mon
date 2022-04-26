@@ -16,7 +16,9 @@
     "express": "^4.17.3",
     "mongoose": "^6.3.1",
     "vue": "^3.2.13",
+    "vue-password-strength-meter": "^1.7.2",
     "vue-router": "^4.0.3",
+    "vue-simple-password-meter": "^1.1.0",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
