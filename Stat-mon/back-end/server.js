@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 var options = {
-    origin: "http://localhost:8080"
+    origin: "http://10.0.0.173:8080" // CHANGE TO RESPECTIVE FRONT END NETWORK IF DIFFERENT
 };
 app.use(cors(options));
 app.use(express.json());
