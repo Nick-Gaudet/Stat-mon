@@ -99,11 +99,14 @@ export default{
     table-layout: auto;
     margin :auto;
     height: 500px;
-    max-width : 80%;
+    max-width : 60%;
     overflow-y: scroll;
     border : 2px solid;
     border-color: #1673bd;
     border-collapse: collapse;
+}
+#league{
+  margin: 2rem;
 }
 th, td{
   border-bottom: 1px solid #1673bd;
