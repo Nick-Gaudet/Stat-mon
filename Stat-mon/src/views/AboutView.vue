@@ -1,15 +1,15 @@
 <template>
     <div>
-        <About />
+        <AboutPage />
     </div>
 </template>
 
 <script>
 /* eslint-disable */
-import About from '../components/About.vue'
+import AboutPage from '../components/AboutPage.vue'
 export default{
     name : 'AboutView',
-    components: {About},
+    components: {AboutPage},
         data() {
             return{};
         }

@@ -1,8 +1,8 @@
 <template>
   <div class="standings">
-    <h1>Standings</h1>
+    <h1>Rosters</h1>
     <div>
-      <select name="league" id="league" @change="loadTeams" @loadstart="loadTeams" v-model="league">
+      <select name="league" id="league" @change="loadTeams" v-model="league">
         <optgroup label="Select A League">Select A League
         <option value="NBA">NBA</option>
         <option value="MLB">MLB</option>
@@ -10,11 +10,11 @@
         </optgroup>
       </select>
 
-      <!--<select name="team" id="team" @change="loadRoster" @loadstart="loadRoster" v-model="team">
+      <select name="team" id="team" @change="loadRoster" @loadstart="loadTeams" v-model="team">
         <optgroup label="Select A Team">Select A Team
-        <option v-bind:value="team.Key">{{team.City + " " + team.Name}}</option>
+        <option v-bind:key="team.id" v-for="team in teams">{{team.Key}}</option>
         </optgroup>
-      </select>-->
+      </select>
     </div>
 
     <div class='sportsData'>
@@ -66,6 +66,7 @@ export default{
   data(){
     return{
       apiData : [],
+      teams : [],
       league: 'NBA',
       team: 'TOR',
       isBaseball: false,
@@ -73,10 +74,11 @@ export default{
     };
   },
   created:function(){
-    this.loadRoster();
+    this.loadTeams();
   },
   methods:{
     loadTeams(){
+      this.loadRoster();
       let apiKey = "";
       if (this.league == "NBA"){
         this.isBaseball = false;
@@ -97,7 +99,7 @@ export default{
 
       const options = {
         method: 'GET',
-        url: "https://api.sportsdata.io/v3/"+this.league+"/scores/json/Teams/?key="+apiKey, // this is my free trial key dont do anything evil
+        url: "https://api.sportsdata.io/v3/"+this.league.toLowerCase()+"/scores/json/AllTeams?key="+apiKey, // this is my free trial key dont do anything evil
         
       };
 
@@ -105,7 +107,8 @@ export default{
         // console.log(response.data);
         // this.teamPhoto = (JSON.stringify(response.data.response[0][0].team.logo));
         // this.apiData = (JSON.stringify(response.data.response[0][0].team.logo));
-        this.apiData = response.data;
+        this.teams = response.data;
+        console.log(this.teams);
       }).catch(function (error) {
         console.error(error);
       });

@@ -7,8 +7,9 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
-  name: 'About'
+  name: 'AboutPage'
 }
 </script>
 
