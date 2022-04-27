@@ -10,7 +10,7 @@ export default {
     login(email, password, callback) {
         authRequest(email, password, (res) => {
             console.log(res)
-            this.userInfo = res.result// store the user info
+            this.userInfo = res.result.data// store the user info
             if (res.auth) {
                 localStorage.token = res.token;
                 callback({

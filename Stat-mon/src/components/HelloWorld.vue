@@ -1,14 +1,22 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 v-if="!isLoggedIn">Please Login to Display Data!</h1>
+    <h1 v-if="isLoggedIn">Welcome {{ userInfo.name }}</h1>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+
+import loginAuth from "../js/loginAuthentication"
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  props: ["userInfo"],
+  data(){
+    return{
+      isLoggedIn : loginAuth.isLoggedIn()
+    }
   }
 }
 </script>

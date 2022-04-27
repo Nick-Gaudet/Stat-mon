@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld v-bind:userInfo="userInfo"/>
   </div>
 </template>
 
@@ -15,6 +15,15 @@ export default {
   name: 'HomeView',
   components: {
     HelloWorld
+  },
+  data(){
+    return{
+      userInfo : {
+        name: localStorage.name,
+        email: localStorage.email,
+        password: localStorage.password
+      }
+    }
   }
 }
 </script>

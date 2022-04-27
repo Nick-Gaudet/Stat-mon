@@ -56,6 +56,9 @@ export default {
         register(){
             loginAuth.register(this.email,this.name,this.password, (res) =>{
                 if(res.auth){ // if authenticated
+                    localStorage.setItem("email",this.email)
+                    localStorage.setItem("name",this.name)
+                    localStorage.setItem("password",this.password)
                     this.$router.replace("/");
                 }else{
                     this.errorMessage = "User Doesn't Exist! Please Register!"
