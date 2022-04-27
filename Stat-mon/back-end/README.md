@@ -8,7 +8,8 @@ Basic node.js server that accesses MongoDB for user accounts.
 [MongoDB MacOSX](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)  
 [MongoDB Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux/)  
 
-Run `mongosh` in CMD or Terminal
+
+Run MongoDB in OSX Terminal `mongosh`, CMD (Windows) `mongod`, or Linux `mongo`
 
 Create the database: `use stat-mon-db`  
 
