@@ -29,6 +29,7 @@ import auth from '../js/loginAuthentication.js'
             logout: function(){
                 auth.logout((res) =>{
                     console.log(res)
+                    this.$router.replace("/");
                 });
             }
         }
