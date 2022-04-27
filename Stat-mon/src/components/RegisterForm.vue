@@ -40,8 +40,7 @@ export default {
         const password = ref('');
         const score = ref(null);
         const onScore = (res) => {
-            // from 0 to 4
-            // one of : 'risky', 'guessable', 'weak', 'safe' , 'secure'
+            // 0 to 4
             score.value = res.score;
         };
         return{
