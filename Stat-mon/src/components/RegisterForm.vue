@@ -1,5 +1,5 @@
 <template>
-    <form @submit="register">
+    <form @submit.prevent="register">
             <div class="emailField">
                 <label for="email"> Email: </label>
                 <input type="text" v-model="email" name="email" placeholder="Email"/>
@@ -15,8 +15,8 @@
                 <password-meter @score="onScore" class='passwordMeter' :password="password"/>
             </div>
             <div v-if="errorMessage"> {{errorMessage}} </div>
-            <div class="submitButton">
-                <button class="btn"> Register </button>
+            <div v-if="score >= 2" class="submitButton">
+                <button cclass="btn btn-outline-dark" > Register </button>
             </div>
     </form>
 </template>
@@ -28,7 +28,7 @@ import PasswordMeter from 'vue-simple-password-meter'
 import loginAuth from "../js/loginAuthentication"
 export default {
     name: "RegisterForm",
-    components: { PasswordMeter},
+    components: { PasswordMeter },
     data(){
         /* referenced : https://github.com/miladd3/vue-simple-password-meter/tree/next */
         const password = ref('');
@@ -47,19 +47,15 @@ export default {
             onScore
         }
     },
-    methods:{
-        register(e){
-            if(this.score < 2){
-                e.preventDefault();
-            }
+    methods: {
+        register(){
             loginAuth.register(this.email,this.name,this.password, (res) =>{
                 if(res.auth){ // if authenticated
                     this.$router.replace("/");
                 }else{
-                    this.errorMessage = "User account already exists!"
+                    this.errorMessage = "User Doesn't Exist! Please Register!"
                 }
             })
-            
         }
     }
 }
@@ -71,7 +67,9 @@ span{
     display: block;
 }
 //npm install vue-simple-password-meter@next --save GLOBAL references
-
+button{
+    border: 0.2px black;
+}
 .po-password-strength-bar {
     border-radius: 2px;
     transition: all 0.2s linear;

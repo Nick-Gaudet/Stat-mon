@@ -28,7 +28,7 @@ export default {
             }
         })
     },
-    register(email,name,password,callback){ // opposite of login, logically
+    register(email, name, password, callback){ // opposite of login, logically
         authRequest(email, password, (res) => {
             if (res.auth) { // if user account already exists
                 delete localStorage.token;

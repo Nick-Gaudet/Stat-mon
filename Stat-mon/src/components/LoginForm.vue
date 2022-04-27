@@ -10,7 +10,7 @@
             </div>
             <div v-if="errorMessage"> {{errorMessage}} </div>
             <div class="submitButton">
-                <button class="btn"> Login </button>
+                <button class="btn btn-outline-dark"> Login </button>
             </div>
     </form>
 </template>

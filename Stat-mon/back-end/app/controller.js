@@ -5,9 +5,9 @@ const Account = db.accounts;
 exports.create = (req, res) => { // fill the database with user data
 
     const account = new Account({
-        email: req.data.email,
-        name: req.data.name,
-        password: req.data.password
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password
     });
 
     account
