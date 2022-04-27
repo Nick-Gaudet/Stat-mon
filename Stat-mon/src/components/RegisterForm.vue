@@ -17,7 +17,7 @@
         </div>
         <div class="submits">
             <span v-if="score < 2 && !!password">Use Stronger Password!</span>
-            <password-meter @score="onScore" class='passwordMeter' :password="password"/>
+            <password-meter @score="getScore" class='passwordMeter' :password="password"/>
             <div v-if="errorMessage"> {{errorMessage}} </div>
             <div v-if="score >= 2" class="submitButton">
                 <button class="btn btn-outline-dark" > Register </button>
@@ -30,26 +30,17 @@
 <script>
 /* eslint-disable*/
 import { ref } from 'vue';
-import PasswordMeter from 'vue-simple-password-meter'
-import loginAuth from "../js/loginAuthentication"
+import PasswordMeter from 'vue-simple-password-meter' // https://www.npmjs.com/package/vue-simple-password-meter
 export default {
     name: "RegisterForm",
     components: { PasswordMeter },
     data(){
-        /* referenced : https://github.com/miladd3/vue-simple-password-meter/tree/next */
-        const password = ref('');
-        const score = ref(null);
-        const onScore = (res) => {
-            // 0 to 4
-            score.value = res.score;
-        };
         return{
             name: "",
             email: "",
             errorMessage: "",
             password,
-            score,
-            onScore
+            score
         }
     },
     methods: {
@@ -64,6 +55,9 @@ export default {
                     this.errorMessage = "User Doesn't Exist! Please Register!"
                 }
             })
+        },
+        getScore({score,strength}){
+            this.score = score;
         }
     }
 }

@@ -6,4 +6,5 @@ Sports statistics website created for web application development final project.
 | Thomas McDonell | [tmcd-csci](https://github.com/tmcd-csci) |
 
 Independent Portion  
-[here](./node.js_packages.pdf)
+[here](./node.js_packages.pdf)  
+[npm_reference](https://www.npmjs.com/package/vue-simple-password-meter)
