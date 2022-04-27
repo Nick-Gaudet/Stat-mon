@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <h1 v-if="!isLoggedIn">Please Login to Display Data!</h1>
-    <h1 v-if="isLoggedIn">Welcome {{ userInfo.name }}</h1>
+    <h1 v-if="isLoggedIn">{{ userInfo.name }}!</h1>
+    <h1 v-if="isLoggedIn">Welcome to Stat-mon!</h1>
   </div>
 </template>
 
@@ -23,8 +24,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+h1 {
+  margin: 2rem;
 }
 ul {
   list-style-type: none;

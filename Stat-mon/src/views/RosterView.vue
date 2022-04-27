@@ -21,7 +21,6 @@
         <table class="table table-dark table-striped table-hover" id="sportsTable">
             <thead>
                 <tr class="header">
-                    <!--<th>Picture</th>-->
                     <th>Team</th>
                     <th>Name</th>
                     <th>Jersey #</th>
@@ -38,7 +37,6 @@
             </thead>
             <tbody>
                 <tr v-bind:key=player.id v-for="player in apiData">
-                    <!--<td><img src=player.photoUrl></td>-->
                     <td>{{player.Team}}</td>
                     <td>{{player.FirstName + " "+ player.LastName}}</td>
                     <td>{{player.Jersey}}</td>
@@ -80,6 +78,8 @@ export default{
     loadTeams(){
       this.loadRoster();
       let apiKey = "";
+
+      // 
       if (this.league == "NBA"){
         this.isBaseball = false;
         this.isHockey = false;
@@ -104,11 +104,7 @@ export default{
       };
 
       axios.request(options).then((response)=> {
-        // console.log(response.data);
-        // this.teamPhoto = (JSON.stringify(response.data.response[0][0].team.logo));
-        // this.apiData = (JSON.stringify(response.data.response[0][0].team.logo));
         this.teams = response.data;
-        console.log(this.teams);
       }).catch(function (error) {
         console.error(error);
       });
@@ -131,14 +127,11 @@ export default{
 
       const options = {
         method: 'GET',
-        url: "https://api.sportsdata.io/v3/"+this.league+"/scores/json/Players/"+this.team+"?key="+apiKey, // this is my free trial key dont do anything evil
+        url: "https://api.sportsdata.io/v3/"+this.league.toLowerCase()+"/scores/json/Players/"+this.team+"?key="+apiKey, // this is my free trial key dont do anything evil
         
       };
 
       axios.request(options).then((response)=> {
-        // console.log(response.data);
-        // this.teamPhoto = (JSON.stringify(response.data.response[0][0].team.logo));
-        // this.apiData = (JSON.stringify(response.data.response[0][0].team.logo));
         this.apiData = response.data;
       }).catch(function (error) {
         console.error(error);
@@ -166,6 +159,9 @@ th, td{
 td{
   border-left: 1px solid #1673bd;
   border-right : 1px solid #1673bd;
+}
+#league, #team{
+  margin: 2rem;
 }
 tr:hover:not(.header) {
   background-color: #d4d9dd;

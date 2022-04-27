@@ -1,5 +1,4 @@
 /* Login authentication by searching mongoDB */
-// import axios from 'axios'
 /* eslint-disable */
 import dbRequests from "../router/dbRequests"
 
@@ -9,7 +8,6 @@ export default {
     },
     login(email, password, callback) {
         authRequest(email, password, (res) => {
-            console.log(res)
             this.userInfo = res.result.data// store the user info
             if (res.auth) {
                 localStorage.token = res.token;
@@ -38,9 +36,10 @@ export default {
                 this.onLoginStatus(false);
             } else {
                 localStorage.token = res.token;
-                dbRequests.create({ email: email, name: name, password: password })
+                dbRequests.create({ email: email, name: name, password: password }) // send axios request to api
+
                 console.log("Account Registered!")
-                this.userInfo = res.result// store the user info
+                this.userInfo = res.result // store the user info
                 callback({
                     auth: true,
                     token: res.token,

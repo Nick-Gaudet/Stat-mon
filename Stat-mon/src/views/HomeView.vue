@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld v-bind:userInfo="userInfo"/>
+    <HomePage v-bind:userInfo="userInfo"/>
   </div>
 </template>
 
@@ -9,12 +9,12 @@
 
 /* eslint-disable */
 import axios from 'axios'
-import HelloWorld from '@/components/HelloWorld.vue'
+import HomePage from '@/components/HomePage.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    HomePage
   },
   data(){
     return{

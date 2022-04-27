@@ -58,6 +58,8 @@ export default{
     this.loadStandings();
   },
   methods:{
+
+    /* Performs API call to sportsdata.io getting api data to display, requests standings of specific league */
     loadStandings(){
       let apiKey = "";
       if (this.league == "NBA"){
