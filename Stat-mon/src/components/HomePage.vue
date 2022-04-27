@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1 v-if="!isLoggedIn">Please Login to Display Data!</h1>
+    <h1 v-if="!isLoggedIn">Please login to view standings and roster data!</h1>
     <h1 v-if="isLoggedIn">{{ userInfo.name }}!</h1>
     <h1 v-if="isLoggedIn">Welcome to Stat-mon!</h1>
   </div>
@@ -12,7 +12,7 @@
 import loginAuth from "../js/loginAuthentication"
 
 export default {
-  name: 'HelloWorld',
+  name: 'HomePage',
   props: ["userInfo"],
   data(){
     return{
