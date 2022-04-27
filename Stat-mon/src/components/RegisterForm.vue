@@ -30,6 +30,7 @@
 <script>
 /* eslint-disable*/
 import { ref } from 'vue';
+import loginAuth from "../js/loginAuthentication"
 import PasswordMeter from 'vue-simple-password-meter' // https://www.npmjs.com/package/vue-simple-password-meter
 export default {
     name: "RegisterForm",
@@ -39,8 +40,8 @@ export default {
             name: "",
             email: "",
             errorMessage: "",
-            password,
-            score
+            password: null,
+            score: null
         }
     },
     methods: {
